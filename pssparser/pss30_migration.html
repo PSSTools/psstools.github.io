@@ -1,0 +1,186 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PSS 3.0 Migration Guide &mdash; PSSTools  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Architecture" href="architecture.html" />
+    <link rel="prev" title="PSS 3.0 Features" href="pss30_features.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PSSTools
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">pssparser</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#key-features">Key Features</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pss30_features.html">PSS 3.0 Features</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">PSS 3.0 Migration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ast_structure.html">AST Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ast_usage.html">AST Usage Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html">API Reference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../vscode_pss_support/index.html">VSCode PSS Support</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About PSSTools</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PSSTools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">pssparser</a></li>
+      <li class="breadcrumb-item active">PSS 3.0 Migration Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pssparser/pss30_migration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pss-3-0-migration-guide">
+<h1>PSS 3.0 Migration Guide<a class="headerlink" href="#pss-3-0-migration-guide" title="Link to this heading"></a></h1>
+<p>PSS 3.0 is largely backward compatible with PSS 2.x. Most existing PSS 2.x
+code works without modification.</p>
+<section id="breaking-changes">
+<h2>Breaking Changes<a class="headerlink" href="#breaking-changes" title="Link to this heading"></a></h2>
+<p>The following identifiers are newly reserved keywords in PSS 3.0:</p>
+<p><code class="docutils literal notranslate"><span class="pre">monitor</span></code>, <code class="docutils literal notranslate"><span class="pre">yield</span></code>, <code class="docutils literal notranslate"><span class="pre">randomize</span></code>, <code class="docutils literal notranslate"><span class="pre">atomic</span></code>, <code class="docutils literal notranslate"><span class="pre">eventually</span></code>,
+<code class="docutils literal notranslate"><span class="pre">concat</span></code>, <code class="docutils literal notranslate"><span class="pre">overlap</span></code>, <code class="docutils literal notranslate"><span class="pre">schedule</span></code></p>
+<p>If your PSS 2.x code uses any of these as identifiers, rename them:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>// PSS 2.x — will fail if &#39;monitor&#39; used as identifier
+action monitor { }        // ERROR in PSS 3.0
+
+// PSS 3.0 — use a different name
+action monitor_action { } // OK
+</pre></div>
+</div>
+</section>
+<section id="validation-checklist">
+<h2>Validation Checklist<a class="headerlink" href="#validation-checklist" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Parse check</strong> — verify all files parse without errors:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pssparser</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parser</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="p">()</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">parses</span><span class="p">([(</span><span class="s2">&quot;file.pss&quot;</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;file.pss&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())])</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">link</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Keyword check</strong> — search for identifier conflicts:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep<span class="w"> </span>-rE<span class="w"> </span><span class="s1">&#39;\b(monitor|yield|randomize|atomic)\b&#39;</span><span class="w"> </span>*.pss
+</pre></div>
+</div>
+</li>
+<li><p><strong>Regression check</strong> — run your existing test suite.</p></li>
+</ol>
+</section>
+<section id="common-patterns">
+<h2>Common Patterns<a class="headerlink" href="#common-patterns" title="Link to this heading"></a></h2>
+<p><strong>Behavioral coverage with monitors</strong></p>
+<p>Replace ad-hoc coverage tracking with first-class monitor declarations and
+<code class="docutils literal notranslate"><span class="pre">cover</span></code> statements (see <a class="reference internal" href="pss30_features.html"><span class="doc">PSS 3.0 Features</span></a>).</p>
+<p><strong>Procedural randomization</strong></p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">randomize(x)</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code> in <code class="docutils literal notranslate"><span class="pre">exec</span></code> blocks for dynamic constraints
+instead of always relying on declarative <code class="docutils literal notranslate"><span class="pre">rand</span></code>.</p>
+<p><strong>Reference collections</strong></p>
+<p>Manage action handle lists with <code class="docutils literal notranslate"><span class="pre">list&lt;ref</span> <span class="pre">A&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">map&lt;string,</span> <span class="pre">ref</span> <span class="pre">A&gt;</span></code>,
+etc., rather than manual pools.</p>
+<p>For full before/after code examples see the upstream
+<a class="reference external" href="https://github.com/PSSTools/pssparser/blob/main/docs/pss30_migration.rst">pssparser migration guide</a>.</p>
+</section>
+<section id="see-also">
+<h2>See Also<a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="pss30_features.html"><span class="doc">PSS 3.0 Features</span></a> — Complete PSS 3.0 feature reference</p></li>
+<li><p><a class="reference internal" href="quickstart.html"><span class="doc">Quickstart</span></a> — Getting started guide</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pss30_features.html" class="btn btn-neutral float-left" title="PSS 3.0 Features" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="architecture.html" class="btn btn-neutral float-right" title="Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, PSSTools Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
