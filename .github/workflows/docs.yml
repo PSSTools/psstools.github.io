@@ -1,3 +1,9 @@
+# Docs build for psstools/psstools.github.io.
+#
+# THIS WORKFLOW NO LONGER PUBLISHES ANYTHING. It builds the doc set as a CI
+# check; the gh-pages deploy that used to follow it was deleted on 2026-08-31.
+# See the block where that step used to be.
+
 name: Build and Deploy Docs
 
 on:
@@ -27,9 +33,34 @@ jobs:
       - name: Build docs
         run: sphinx-build -W -b html docs docs/_build/html
 
-      - name: Deploy to GitHub Pages
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/_build/html
+      # A gh-pages deploy stood here, publishing https://psstools.github.io/
+      # on every push to main. DELETED, not gated:
+      #
+      #   1. dvkit.org owns documentation for this estate. Docs are not a
+      #      release -- they should publish whichever forge holds release
+      #      authority -- so gating them on the release trigger would be the
+      #      wrong shape even if the site were wanted.
+      #   2. This site is specifically superseded by dvkit.org, and
+      #      sync-policy.toml has said so since 2026-08-18. Re-arming the
+      #      deploy on a tag would resurrect a retired site.
+      #
+      # ⚠️ THE CONTENT HAS NOWHERE TO GO YET. This doc set is not a copy of
+      # anything: it documents pssparser and vscode-pss-support and is the
+      # only place that material exists. Nothing is lost -- the sources are
+      # right here and the site keeps serving its last build -- but until
+      # someone decides where it lands under dvkit.org, it stops being
+      # updated. That decision is open and is recorded in the migration's
+      # OPEN-ISSUES.md rather than being made silently here, because "which
+      # URL is the PSS documentation at" is a naming decision and not a
+      # property of the repository.
+      #
+      # The build above stays as a CI check. It runs with -W, so a Sphinx
+      # warning already fails it; the assertion below covers the other
+      # direction, a build that succeeds while producing nothing.
+      - name: Sanity-check the docs build
+        run: |
+          test -s docs/_build/html/index.html \
+            || { echo "::error::no index.html in the docs build output"; exit 1; }
+          n=$(find docs/_build/html -name '*.html' | wc -l)
+          echo "generated pages: $n"
+          [ "$n" -ge 8 ] || { echo "::error::only $n pages built; refusing to call this a doc set"; exit 1; }
